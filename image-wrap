@@ -1,0 +1,102 @@
+<?php
+/**
+ * The template for displaying all pages
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages and that other
+ * 'pages' on your WordPress site will use a different template.
+ *
+ * @package WordPress
+ * @subpackage Shunno-Theme
+ * @since Shunno-Theme 1.0
+ */
+?>
+
+<?php get_header(); ?>
+
+
+	
+		<div id="content" class="site-content" role="main">
+			<?php the_post(); ?>
+				<article>
+					<div class="entry-featured post" >
+					<?php the_post_thumbnail(); ?>
+					<div class="entry-content content" style="margin-top:10rem;">
+						<div class="row  shunno-page">
+							<div class="large-5 medium-6 small-12 left columns">
+								<div class="large-12 medium-12 small-12 heading columns"><a href="#">LATEST NEWS</a></div>
+								
+<?php 
+	$query_args = array(
+    'post_type' => 'post',
+    'category_name' => 'news',
+    'posts_per_page' => 2
+  );
+  // create a new instance of WP_Query
+  $the_query = new WP_Query( $query_args );
+?>
+
+<?php if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); // run the loop ?>
+	<div class="latest-news  ">
+											<div class="row">
+												<div class="small-6 medium-7 large-7 columns thumbnail_latest_news" ><?php  the_post_thumbnail(); ?></div>
+												<div class="small-6 medium-5 large-5 columns">
+													<div class="post-title"><?php echo the_title() ?></div>
+													<span class="cta"><a href="#">READ MORE</a></span>
+												</div>
+											</div>
+											</div>
+												<?php endwhile; ?>
+					<?php endif; ?>
+											
+											    
+		
+							</div>
+							<div class="large-4 medium-5 small-12 columns">
+							<!--	<div class="large-12 medium-12 small-12 left"><a href="#">LATEST RELEASE</a></div> -->
+								<?php 
+	$query_args = array(
+    'post_type' => 'post',
+    'category_name' => 'music',
+    'posts_per_page' => 1
+  );
+  // create a new instance of WP_Query
+  $the_query = new WP_Query( $query_args );
+?>
+
+<?php if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); // run the loop ?>
+<div class="large-12 medium-12 small-12  heading left"><a href="#">LATEST RELEASE</a></div>
+<div class="home-div1 right"><?php  the_post_thumbnail(); ?>
+<div class="post-layout">
+<div class="link_album left"><a href="#">BUY ALBUM</a></div>
+<div class="link_album right"><a href="#">LISTEN</a></div>
+</div>
+</div>
+<!--	<div class=" latest-release ">
+								
+					<div class="small-12 medium-12 large-12 columns thumbnail_latest_album"><?php  the_post_thumbnail(); ?></div>
+					<div class="small-12 medium-12 large-12 columns" >
+						<div class="row">
+							<div class="large-6 medium-6 small-6 columns"><a href="#">BUY ALBUM</a></div>
+							<div class="large-6 medium-6 small-6 columns"><a href="#">LISTEN</a></div>
+						</div>	
+					</div>
+										
+									</div> -->
+												<?php endwhile; ?>
+					<?php endif; ?>
+	
+						
+						</div>
+					</div>	
+					
+					</div>
+				</article>
+		
+	
+	</div><!-- #primary -->
+
+
+<?php get_footer(); ?>
+
+
